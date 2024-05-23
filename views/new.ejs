@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Document</title>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+
+    <div class="container">
+        <div class="content">
+            <h1>Новое мероприятие</h1>
+            <form action="/api/events/new" method="POST" class="event-form" enctype="multipart/form-data">
+                <input type="text" placeholder="Введите заголовок" name="title">
+                <input type="date" placeholder="Дата" name="date">
+                <input type="time" placeholder="Время" name="time">
+                <input type="text" placeholder="Место проведения" name="place">
+                <input type="text" placeholder="Адрес" name="address">
+                <label style="text-align: left;" for="">Выберите категорию:</label>
+                <select name="category" id="">
+                    <%
+                        categories.forEach(category => {
+                    %>
+                        <option value="<%=category._id%>"><%=category.name%></option>
+                    <%
+                        })
+                    %>
+                </select>
+                
+                <input type="number" placeholder="Вместимость" name="capacity" required min="1">
+
+                <div class="file-input">
+                    <input type="file" name="image">
+                    <a href="">Выберите картинку</a>
+                </div>
+                <button>
+                    <a type="submit">Создать</a>
+                </button>
+            </form>
+        </div>
+    </div>
+    
+   
+</body>
+</html>

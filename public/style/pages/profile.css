@@ -1,0 +1,77 @@
+.profile{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    margin-top: -20px;
+    gap: 20px;
+}
+
+
+.profile-img{
+    width: 15%;
+}
+
+.profile-img img{
+    width: 100%;
+}
+
+.profile-info{
+    width: 30%;
+}
+
+.profile-info p{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.profile-info span{
+    font-weight: 600;
+}
+
+.profile-info button{
+    margin-top: 10px;
+    align-items: center;
+    background-color: #6c7cf5;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: 500;
+    justify-content: center;
+    padding: 8px 15px;
+}
+
+.profile-info button:last-child{
+    background-color: #21243c;
+}
+
+.main-title .admin-btn{
+    background-color: #ec6652;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: 500;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.edit-btns{
+    text-align: center;
+    display: flex;
+}
+
+.edit-btns a>button{
+    background-color: #ec6652;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: 500;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.edit-btns .delete{
+    background-color: #21243c;
+}

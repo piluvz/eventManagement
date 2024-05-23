@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Document</title>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+
+    <div class="container">
+        <div class="content">
+            <h1>Редактировать</h1>
+            <form action="/api/events/edit" method="POST" class="event-form" enctype="multipart/form-data">
+                <fieldset>
+                    <input type="hidden" value="<%=event._id%>" name="id">
+                </fieldset>
+                <input type="text" value="<%=event.title%>" placeholder="Введите заголовок" name="title">
+                <input type="date" value="<%=event.date%>" placeholder="Дата" name="date">
+                <input type="time" value="<%=event.time%>" placeholder="Время" name="time">
+                <input type="text" value="<%=event.place%>" placeholder="Место проведения" name="place">
+                <input type="text" value="<%=event.address%>" placeholder="Адрес" name="address">
+                <label style="text-align: left;" for="">Выберите категорию:</label>
+                <select name="category" id="">
+                    <%
+                        categories.forEach(category => {
+                            if(category.id == event.category){
+                    %>
+                                <option value="<%=category._id%>" selected><%=category.name%></option>
+                    <%
+                            }else{
+                    %> 
+                                <option value="<%=category._id%>"><%=category.name%></option>
+                    <%
+                            }
+                        })
+                    %>
+                </select>
+
+                <input type="number" value="<%= event.capacity %>" placeholder="Вместимость" name="capacity" required min="1">
+                <p>Доступные места: <%= event.availableSeats %></p>
+                
+                <div class="file-input">
+                    <input type="file" name="image">
+                    <a href="">Выберите картинку</a>
+                </div>
+                <button>
+                    <a type="submit">Сохранить</a>
+                </button>
+            </form>
+        </div>
+    </div>
+    
+   
+</body>
+</html>

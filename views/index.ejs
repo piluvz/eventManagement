@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Document</title>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+
+    <nav class="categories">
+        <% categories.forEach(category => { %>
+            <a href="?categ=<%=category.key%>"><%=category.name%></a>
+        <% }) %>
+    </nav>
+
+    <div class="main">
+        <div class="main-title">
+            <h1>Афиша событий Актобе</h1>
+        </div>
+        <div class="main-content">
+
+            <% 
+            events.forEach(item => {
+            %>
+            <div class="event">
+                <div class="event-img">
+                    <a href="">
+                        <img src="<%=item.image%>" alt="">
+                    </a>
+
+                    <%
+                    if(user.myEvents && user.myEvents.includes(item._id)){
+                    %>
+
+                    <div class="event-booking">
+                        <a href=""><button class="book-btn" onclick="registerToEvent(event, '<%=item._id%>')">
+                            Место забронировано
+                        </button></a>
+                    </div>
+
+                    <%
+                    }else{
+                    %>
+
+                    <div class="event-booking">
+                        <a href=""><button class="book-btn" onclick="registerToEvent(event, '<%=item._id%>')">
+                            Зарегистрироваться
+                        </button></a>
+                    </div>
+
+                    <%
+                    }
+                    %>
+
+                    <div class="event-categ">
+                        <i class="fa-regular fa-calendar badge"></i>
+                        <p class="badge"><%=item.category.name%></p>
+                        <p class="badge">Мест: <%= item.availableSeats %></p>
+                    </div>
+                </div>
+                <a href="/detail/<%=item._id%>"><%=item.title%></a>
+                <div class="event-info">
+                    <p><%=item.date%> в <%=item.time%>, <%=item.place%>, <%=item.address%></p>
+                </div>
+            </div>
+            <%
+            })
+            %>
+        </div> 
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/registerToEvent.js"></script>
+</body>
+</html>

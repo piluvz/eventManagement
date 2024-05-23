@@ -1,0 +1,36 @@
+<header>
+    <div class="head-logo">
+        <i class="fa-solid fa-location-dot"></i>
+        <a href="/">AKTOBE</a>
+    </div>
+    <form class="head-search">
+        <input type="text" name="search" placeholder="Поиск по мероприятиям">
+        <button>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            Найти
+        </button>
+    </form>
+
+    <%
+        if(user._id && user.isAdmin){
+    %>   
+    <div class="head-btns">
+        <a href="/admin/<%=user._id%>"><button class="head-btn">Мой профиль</button></a>
+    </div>
+    <%
+        }else if(user._id && !user.isAdmin){
+    %>
+    <div class="head-btns">
+        <a href="/profile/<%=user._id%>"><button class="head-btn">Мой профиль</button></a>
+    </div>
+    <%
+        }else{
+    %>
+    <div class="head-btns">
+        <a href="/register"><button class="head-btn">Регистрация</button></a>
+        <a href="/login"><button class="head-btn">Вход</button></a>
+    </div>
+    <%
+        }
+    %>
+</header>

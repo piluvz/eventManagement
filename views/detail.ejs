@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Document</title>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+
+    <div class="cont">
+        <div class="details-page">
+            <div class="main-info">
+                <div class="detail-img">
+                    <img src="<%=event.image%>" alt="">
+                </div>
+                <div class="detail-title">
+                    <h1><%=event.title%></h1>
+                    <div class="icons"> 
+                        <p><%=event.category.name%></p>
+                        <p>Мест: <%= event.availableSeats %></p>
+                    </div>
+
+                    <%
+                    if(user.myEvents && user.myEvents.includes(event._id)){
+                    %>
+                    <a href=""><button onclick="cancelRegistration(event, '<%=event._id%>')">Место забронировано</button></a>
+
+                    <%
+                    }else{
+                    %>
+                    <div class="btn">
+                        <a style="margin-bottom: 10px" href=""><button onclick="registerToEvent(event, '<%=event._id%>')">Зарегистрироваться</button></a>
+                        <% if (!user || !user._id) { %>
+                            <span style="font-size: 14px;">(Чтобы забронировать место, нужно войти в аккаунт)</span>
+                        <% } %>
+                    </div>
+
+                    <%
+                    }
+                    %>
+                </div>
+            </div>
+            <div class="event-details">
+                <div class="detail">
+                    <p class="label">Дата:</p>
+                    <p><%=event.date%></p>
+                </div>
+                <div class="detail">
+                    <p class="label">Время:</p>
+                    <p><%=event.time%></p>
+                </div>
+                <div class="detail">
+                    <p class="label">Место:</p>
+                    <p><%=event.place%></p>
+                </div>
+                <div class="detail">
+                    <p class="label">Адрес:</p>
+                    <p><%=event.address%></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/registerToEvent.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Document</title>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+
+    <nav class="categories">
+        <% categories.forEach(category => { %>
+            <a href="?categ=<%=category.key%>"><%=category.name%></a>
+        <% }) %>
+    </nav>
+
+    <div class="main">
+        <div class="main-title">
+            <h1>Профиль</h1>
+        </div>
+
+        <div class="profile">
+            <div class="profile-img">
+                <img src="/img/profile-img.jpg" alt="">
+            </div>
+            <div class="profile-info">
+                <p><span>Полное имя: </span><%=user.full_name%></p>
+                <p><span>E-mail: </span><%=user.email%></p>
+                <%
+                if(loginUser.id == user.id){
+                %>  
+                <button>Редактировать профиль</button>
+                <a href="/api/signout"><button>Выход</button></a>
+                <%  
+                    }
+                %>
+            </div>
+        </div>
+        <div style="margin-top: 30px;" class="main-title">
+            <h1>Cобытия</h1>
+            <a href="/new"><button class="admin-btn">Добавить мероприятие</button></a>
+        </div>
+        <div class="main-content">
+            <% 
+            events.forEach(item => {
+            %>
+            <div class="event">
+                <div class="event-img">
+                    <a href="">
+                        <img src="<%=item.image%>" alt="">
+                    </a>
+                    <div class="event-booking">
+                        <a href=""><button class="book-btn">Зарегистрироваться</button></a>
+                    </div>
+                    <div class="event-categ">
+                        <i class="fa-regular fa-calendar badge"></i>
+                        <p class="badge"><%=item.category.name%></p>
+                        <p class="badge">Мест: <%= item.availableSeats %></p>
+                    </div>
+                </div>
+                <a href=""><%=item.title%></a>
+                <div class="event-info">
+                    <p><%=item.date%> в <%=item.time%>, <%=item.place%>, <%=item.address%></p>
+                </div>
+
+                <div class="edit-btns">
+                    <a href="/edit/<%=item._id%>"><button>Редактировать</button></a>
+                    <a onclick="deleteEvent('<%=item._id%>', '<%=item.author._id%>')"><button class="delete">Удалить</button></a>
+                </div>
+            </div>
+            <%
+            })
+            %>
+        </div> 
+    </div>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js" integrity="sha512-PJa3oQSLWRB7wHZ7GQ/g+qyv6r4mbuhmiDb8BjSFZ8NZ2a42oTtAq5n0ucWAwcQDlikAtkub+tPVCw4np27WCg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/deleteEvent.js"> </script>
+</body>
+</html>
